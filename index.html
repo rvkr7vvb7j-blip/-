@@ -28,9 +28,6 @@ body {
     font-family: Arial, "Noto Sans KR", sans-serif;
 }
 
-
-/* 카드 */
-
 .card {
     position: relative;
     width: 330px;
@@ -48,9 +45,6 @@ body {
 
     overflow: hidden;
 }
-
-
-/* 모든 화면 */
 
 .page {
     position: absolute;
@@ -71,9 +65,6 @@ body {
     display: flex;
 }
 
-
-/* 등장 효과 */
-
 .page.active > * {
     animation: appear .45s ease;
 }
@@ -89,9 +80,6 @@ body {
         transform: translateY(0);
     }
 }
-
-
-/* 봉투 */
 
 .envelope {
     font-size: 75px;
@@ -110,9 +98,6 @@ body {
     }
 }
 
-
-/* 글씨 */
-
 h1 {
     margin: 10px 0 20px;
 
@@ -122,9 +107,6 @@ h1 {
 
     line-height: 1.5;
 }
-
-
-/* 열어보기 */
 
 .open-btn {
     border: 0;
@@ -144,9 +126,6 @@ h1 {
     box-shadow: 0 6px 15px rgba(228,91,134,.25);
 }
 
-
-/* 질문 */
-
 .question-buttons {
     position: relative;
 
@@ -155,9 +134,6 @@ h1 {
 
     margin-top: 0;
 }
-
-
-/* Yes */
 
 .yes-btn {
     position: absolute;
@@ -181,9 +157,6 @@ h1 {
 
     z-index: 2;
 }
-
-
-/* No */
 
 .no-btn {
     position: absolute;
@@ -209,9 +182,6 @@ h1 {
         left .35s ease,
         top .35s ease;
 }
-
-
-/* 🙈🎀 */
 
 .cute {
     font-size: 58px;
@@ -240,9 +210,6 @@ h1 {
     }
 }
 
-
-/* 나듀 */
-
 .nadeu {
     margin-top: 2px;
 
@@ -251,9 +218,6 @@ h1 {
     font-size: 10px;
     font-weight: bold;
 }
-
-
-/* 하트 */
 
 .heart {
     position: absolute;
@@ -277,19 +241,14 @@ h1 {
         transform: translateY(-180px) scale(1.5);
     }
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="card">
 
-
-    <!-- =========================
-         1. 편지
-    ========================== -->
+    <!-- 첫 번째 화면 -->
 
     <div
         class="page active"
@@ -314,9 +273,7 @@ h1 {
     </div>
 
 
-    <!-- =========================
-         2. 사랑하지?
-    ========================== -->
+    <!-- 두 번째 화면 -->
 
     <div
         class="page"
@@ -351,9 +308,7 @@ h1 {
     </div>
 
 
-    <!-- =========================
-         3. 보고싶지?
-    ========================== -->
+    <!-- 세 번째 화면 -->
 
     <div
         class="page"
@@ -388,9 +343,7 @@ h1 {
     </div>
 
 
-    <!-- =========================
-         4. 마지막
-    ========================== -->
+    <!-- 마지막 화면 -->
 
     <div
         class="page"
@@ -418,9 +371,7 @@ let timer1 = null;
 let timer2 = null;
 
 
-/* =========================
-   페이지 이동
-========================= */
+/* 화면 이동 */
 
 function showPage(pageNumber) {
 
@@ -430,213 +381,152 @@ function showPage(pageNumber) {
             page.classList.remove("active");
         });
 
-
     document
         .getElementById("page" + pageNumber)
         .classList.add("active");
 
-
     currentPage = pageNumber;
 
-
-    /* 첫 번째 질문 */
-
     if (pageNumber === 2) {
-
-        startNo("no1", 1);
-
+        startNo("no1", 2);
     }
-
-
-    /* 두 번째 질문 */
 
     else if (pageNumber === 3) {
-
         stopNo1();
-
-        startNo("no2", 2);
-
+        startNo("no2", 3);
     }
-
-
-    /* 마지막 */
 
     else if (pageNumber === 4) {
-
         stopNo1();
         stopNo2();
-
         makeHearts();
-
     }
-
 }
 
 
-/* =========================
-   No 움직이기 시작
-========================= */
+/* No 움직이기 시작 */
 
-function startNo(id, number) {
+function startNo(id, pageNumber) {
 
-    let no =
+    const no =
         document.getElementById(id);
-
-    let area =
-        no.parentElement;
-
-
-    /* 처음 위치 */
 
     no.style.left = "155px";
     no.style.top = "10px";
 
-
-    /* 바로 한 번 움직이기 */
-
     setTimeout(function() {
 
-        if (currentPage === number + 1) {
-            moveNo(no, area);
+        if (currentPage === pageNumber) {
+            moveNo(no);
         }
 
-    }, 500);
+    }, 400);
 
 
-    /* 계속 움직이기 */
-
-    if (number === 1) {
+    if (pageNumber === 2) {
 
         clearInterval(timer1);
 
         timer1 = setInterval(function() {
 
             if (currentPage === 2) {
-                moveNo(no, area);
+                moveNo(no);
             }
 
         }, 800);
-
     }
 
 
-    if (number === 2) {
+    if (pageNumber === 3) {
 
         clearInterval(timer2);
 
         timer2 = setInterval(function() {
 
             if (currentPage === 3) {
-                moveNo(no, area);
+                moveNo(no);
             }
 
         }, 800);
-
     }
-
 }
 
 
-/* =========================
-   No 랜덤 이동
-========================= */
+/* No 랜덤 이동 */
 
-function moveNo(no, area) {
+function moveNo(no) {
 
-    let maxX =
+    const area =
+        no.parentElement;
+
+    const maxX =
         area.clientWidth - no.offsetWidth;
 
-    let maxY =
+    const maxY =
         area.clientHeight - no.offsetHeight;
 
-
-    let x =
+    const x =
         Math.random() * Math.max(1, maxX);
 
-    let y =
+    const y =
         Math.random() * Math.max(1, maxY);
-
 
     no.style.left = x + "px";
     no.style.top = y + "px";
-
 }
 
 
-/* =========================
-   타이머 정지
-========================= */
+/* 타이머 정지 */
 
 function stopNo1() {
 
     if (timer1 !== null) {
-
         clearInterval(timer1);
-
         timer1 = null;
-
     }
-
 }
 
 
 function stopNo2() {
 
     if (timer2 !== null) {
-
         clearInterval(timer2);
-
         timer2 = null;
-
     }
-
 }
 
 
-/* =========================
-   하트
-========================= */
+/* 하트 */
 
 function makeHearts() {
 
     const card =
         document.querySelector(".card");
 
-
     for (let i = 0; i < 12; i++) {
 
         const heart =
             document.createElement("div");
 
-
         heart.className = "heart";
 
         heart.innerText = "♡";
 
-
         heart.style.left =
             (Math.random() * 90 + 5) + "%";
-
 
         heart.style.bottom =
             (Math.random() * 30 + 20) + "%";
 
-
         heart.style.animationDelay =
             (Math.random() * .5) + "s";
 
-
         card.appendChild(heart);
 
-
         setTimeout(function() {
-
             heart.remove();
-
         }, 2000);
-
     }
-
 }
 
 </script>
