@@ -11,10 +11,17 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: transparent;
+}
+
+body {
     min-height: 100vh;
-    background: #f9dce7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,26 +29,46 @@ body {
     overflow: hidden;
 }
 
+
+/* 편지 */
+
 .card {
-    width: min(88vw, 430px);
-    min-height: 720px;
+    width: min(330px, 85vw);
+    height: min(500px, 80vh);
+
     background: white;
     border-radius: 24px;
-    padding: 40px 25px;
+
+    padding: 30px 20px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     text-align: center;
-    box-shadow: 0 10px 30px rgba(150, 70, 100, 0.12);
+
+    box-shadow:
+        0 10px 30px rgba(150, 70, 100, 0.15);
+
     position: relative;
     overflow: hidden;
+
+    animation: cardFloat 3s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 
-/* =========================
-   화면
-========================= */
+/* 화면 */
 
 .screen {
     width: 100%;
@@ -69,17 +96,17 @@ body {
 }
 
 
-/* =========================
-   봉투
-========================= */
+/* 봉투 */
 
 .envelope {
-    font-size: 90px;
-    margin-bottom: 25px;
-    animation: floating 2s ease-in-out infinite;
+    font-size: 75px;
+    margin-bottom: 20px;
+
+    animation:
+        envelopeFloat 2s ease-in-out infinite;
 }
 
-@keyframes floating {
+@keyframes envelopeFloat {
     0%, 100% {
         transform: translateY(0);
     }
@@ -90,27 +117,17 @@ body {
 }
 
 
-/* =========================
-   글씨
-========================= */
+/* 글씨 */
 
 h1 {
     color: #c94b75;
-    font-size: 25px;
-    margin: 10px 0 15px;
+    font-size: 23px;
+    margin: 10px 0 20px;
     line-height: 1.5;
 }
 
-p {
-    color: #777;
-    font-size: 15px;
-    margin: 8px 0 25px;
-}
 
-
-/* =========================
-   버튼
-========================= */
+/* 버튼 */
 
 button {
     border: none;
@@ -122,11 +139,16 @@ button {
 .main-btn {
     background: #e45b86;
     color: white;
+
     border-radius: 40px;
-    padding: 15px 30px;
-    font-size: 17px;
+
+    padding: 13px 25px;
+
+    font-size: 16px;
     font-weight: bold;
-    box-shadow: 0 6px 15px rgba(228,91,134,.25);
+
+    box-shadow:
+        0 6px 15px rgba(228,91,134,.25);
 }
 
 .main-btn:hover {
@@ -134,9 +156,7 @@ button {
 }
 
 
-/* =========================
-   Yes / No
-========================= */
+/* Yes / No */
 
 .choices {
     display: flex;
@@ -146,11 +166,14 @@ button {
 }
 
 .choice {
-    padding: 13px 30px;
+    padding: 12px 27px;
+
     border-radius: 30px;
+
     background: #e45b86;
     color: white;
-    font-size: 16px;
+
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -164,12 +187,12 @@ button {
 }
 
 
-/* =========================
-   질문 변경
-========================= */
+/* 질문 */
 
 .question {
-    transition: opacity .5s ease, transform .5s ease;
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
 }
 
 .question.hide {
@@ -183,51 +206,108 @@ button {
 }
 
 
-/* =========================
-   고양이 GIF
-========================= */
+/* 고양이 */
 
 .cat-gif {
-    width: 220px;
-    max-width: 75%;
+    width: 230px;
+    max-width: 80%;
+
     border-radius: 15px;
+
     display: block;
-    margin-bottom: 20px;
+
+    margin-bottom: 15px;
+
+    animation:
+        catCute 1.8s ease-in-out infinite;
 }
 
 
-/* =========================
-   사룽해
-========================= */
+/* 고양이 통통 움직이기 */
+
+@keyframes catCute {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            translateY(-6px)
+            rotate(-2deg)
+            scale(1.02);
+    }
+
+    50% {
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(1.04);
+    }
+
+    75% {
+        transform:
+            translateY(-6px)
+            rotate(2deg)
+            scale(1.02);
+    }
+}
+
+
+/*💝*/
 
 .love-text {
     color: #c94b75;
-    font-size: 30px;
+
+    font-size: 29px;
+
     font-weight: 900;
+
     margin: 10px 0;
 }
 
 
-/* =========================
-   날아다니는 하트
-========================= */
+/* No 문구 */
+
+.small {
+    font-size: 13px;
+    color: #999;
+    margin-top: 20px;
+}
+
+
+/* 하트 */
 
 .floating-heart {
     position: absolute;
+
     font-size: 20px;
+
     pointer-events: none;
-    animation: fly 1.5s ease-out forwards;
+
+    animation:
+        fly 1.5s ease-out forwards;
 }
 
 @keyframes fly {
+
     0% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 
     100% {
         opacity: 0;
-        transform: translateY(-180px) scale(1.5);
+
+        transform:
+            translateY(-180px)
+            scale(1.5);
     }
 }
 
@@ -240,11 +320,12 @@ button {
 <div class="card">
 
 
-    <!-- =================================
-         첫 번째 화면
-    ================================= -->
+    <!-- 첫 번째 화면 -->
 
-    <div class="screen active" id="screen1">
+    <div
+        class="screen active"
+        id="screen1"
+    >
 
         <div class="envelope">
             💌
@@ -265,13 +346,12 @@ button {
 
 
 
-    <!-- =================================
-         두 번째 화면
-    ================================= -->
+    <!-- 두 번째 화면 -->
 
-    <div class="screen" id="screen2">
-
-        <!-- 처음 나오는 문구 -->
+    <div
+        class="screen"
+        id="screen2"
+    >
 
         <h1
             id="question1"
@@ -280,8 +360,6 @@ button {
             나 사랑하지??🥺
         </h1>
 
-
-        <!-- 1.5초 후 나오는 문구 -->
 
         <h1
             id="question2"
@@ -292,8 +370,6 @@ button {
         </h1>
 
 
-        <!-- Yes / No 버튼 -->
-
         <div class="choices">
 
             <button
@@ -302,6 +378,7 @@ button {
             >
                 Yes
             </button>
+
 
             <button
                 class="choice no"
@@ -322,28 +399,22 @@ button {
 
 
 
-    <!-- =================================
-         세 번째 화면
-    ================================= -->
+    <!-- 세 번째 화면 -->
 
-    <div class="screen" id="screen3">
-
-        <!--
-            카툰 고양이 GIF
-
-            HTML 파일과 같은 폴더에
-            cat.gif 파일을 넣어주세요.
-        -->
+    <div
+        class="screen"
+        id="screen3"
+    >
 
         <img
-            src="cat.gif"
-            alt="부끄러워하는 카툰 고양이"
             class="cat-gif"
+            alt="부끄러운 카툰 고양이"
+            src="data:image/jpeg;base64,여기에_사진데이터가_들어감"
         >
 
 
         <h1 class="love-text">
-            사룽해.
+            💝
         </h1>
 
     </div>
@@ -355,16 +426,19 @@ button {
 
 <script>
 
-/* =========================
-   화면 이동
-========================= */
+let questionTimer;
+
+
+/* 화면 이동 */
 
 function nextScreen(number) {
 
     document
         .querySelectorAll(".screen")
         .forEach(screen => {
+
             screen.classList.remove("active");
+
         });
 
 
@@ -373,16 +447,10 @@ function nextScreen(number) {
         .classList.add("active");
 
 
-    /* 두 번째 화면에 들어왔을 때
-       질문 변경 시작 */
-
     if (number === 2) {
         startQuestionChange();
     }
 
-
-    /* 세 번째 화면에 들어왔을 때
-       하트 효과 */
 
     if (number === 3) {
         createHearts();
@@ -391,9 +459,7 @@ function nextScreen(number) {
 }
 
 
-/* =========================
-   No 버튼
-========================= */
+/* No 버튼 */
 
 function nope() {
 
@@ -406,15 +472,15 @@ function nope() {
 
 
     setTimeout(() => {
+
         text.innerText = "";
+
     }, 1500);
 
 }
 
 
-/* =========================
-   하트 효과
-========================= */
+/* 하트 효과 */
 
 function createHearts() {
 
@@ -450,7 +516,9 @@ function createHearts() {
 
 
         setTimeout(() => {
+
             heart.remove();
+
         }, 2000);
 
     }
@@ -458,18 +526,11 @@ function createHearts() {
 }
 
 
-/* =========================
-   질문 변경
-========================= */
-
-let questionTimer;
+/* 질문 변경 */
 
 function startQuestionChange() {
 
     clearTimeout(questionTimer);
-
-
-    /* 처음 상태로 다시 설정 */
 
     const first =
         document.getElementById("question1");
@@ -491,8 +552,6 @@ function startQuestionChange() {
     second.classList.remove("show");
 
 
-    /* 1.5초 후 변경 */
-
     questionTimer =
         setTimeout(() => {
 
@@ -505,7 +564,6 @@ function startQuestionChange() {
                 first.style.display =
                     "none";
 
-
                 second.style.display =
                     "block";
 
@@ -516,9 +574,7 @@ function startQuestionChange() {
 
                 }, 50);
 
-
             }, 500);
-
 
         }, 1500);
 
