@@ -16,35 +16,37 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     background: transparent;
 }
 
 body {
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
     font-family: Arial, "Noto Sans KR", sans-serif;
+
     overflow: hidden;
 }
 
 
 /* =========================
-   편지
+   편지 카드
 ========================= */
 
 .card {
-    width: min(330px, 85vw);
-    min-height: 500px;
+    width: 330px;
+    max-width: 85vw;
+    height: 500px;
 
     background: white;
+
     border-radius: 24px;
 
-    padding: 40px 25px;
+    padding: 35px 25px;
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -54,6 +56,7 @@ body {
         0 10px 30px rgba(150, 70, 100, 0.12);
 
     position: relative;
+
     overflow: hidden;
 }
 
@@ -64,11 +67,16 @@ body {
 
 .screen {
     width: 100%;
+    height: 100%;
+
     display: none;
+
     flex-direction: column;
-    align-items: center;
+
     justify-content: center;
-    animation: fadeIn .5s ease;
+    align-items: center;
+
+    animation: fadeIn 0.5s ease;
 }
 
 .screen.active {
@@ -93,13 +101,17 @@ body {
 ========================= */
 
 .envelope {
-    font-size: 90px;
-    margin-bottom: 25px;
-    animation: floating 2s ease-in-out infinite;
+    font-size: 75px;
+
+    margin-bottom: 20px;
+
+    animation: envelopeFloat 2s ease-in-out infinite;
 }
 
-@keyframes floating {
-    0%, 100% {
+@keyframes envelopeFloat {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
 
@@ -110,94 +122,53 @@ body {
 
 
 /* =========================
-   글씨
+   제목
 ========================= */
 
 h1 {
     color: #c94b75;
-    font-size: 25px;
-    margin: 10px 0 15px;
+
+    font-size: 24px;
+
+    margin: 10px 0 18px;
+
     line-height: 1.5;
 }
 
 
 /* =========================
-   버튼
+   메인 버튼
 ========================= */
 
 button {
     border: none;
+
     cursor: pointer;
+
     font-family: inherit;
-    transition: transform .2s ease;
 }
 
 .main-btn {
     background: #e45b86;
+
     color: white;
 
     border-radius: 40px;
 
-    padding: 15px 30px;
+    padding: 14px 28px;
 
-    font-size: 17px;
+    font-size: 16px;
+
     font-weight: bold;
 
     box-shadow:
-        0 6px 15px rgba(228,91,134,.25);
+        0 6px 15px rgba(228, 91, 134, 0.25);
+
+    transition: transform 0.2s ease;
 }
 
 .main-btn:hover {
     transform: scale(1.05);
-}
-
-
-/* =========================
-   Yes / No
-========================= */
-
-.choices {
-    width: 100%;
-    height: 70px;
-
-    display: flex;
-    gap: 12px;
-
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-}
-
-.choice {
-    padding: 13px 30px;
-
-    border-radius: 30px;
-
-    background: #e45b86;
-
-    color: white;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    position: relative;
-}
-
-.choice:hover {
-    transform: scale(1.05);
-}
-
-.choice.no {
-    background: #eee;
-    color: #888;
-
-    position: absolute;
-
-    transition:
-        left .35s ease,
-        top .35s ease,
-        transform .2s ease;
 }
 
 
@@ -207,18 +178,108 @@ button {
 
 .question {
     transition:
-        opacity .5s ease,
-        transform .5s ease;
+        opacity 0.4s ease,
+        transform 0.4s ease;
 }
 
 .question.hide {
     opacity: 0;
+
     transform: translateY(-10px);
 }
 
 .question.show {
     opacity: 1;
+
     transform: translateY(0);
+}
+
+
+/* =========================
+   버튼 영역
+========================= */
+
+.choices {
+    width: 100%;
+    height: 150px;
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   Yes
+========================= */
+
+.choice.yes {
+    position: absolute;
+
+    left: 50%;
+
+    top: 10px;
+
+    transform: translateX(-65px);
+
+    background: #e45b86;
+
+    color: white;
+
+    border-radius: 30px;
+
+    padding: 13px 28px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    z-index: 5;
+
+    transition: transform 0.2s ease;
+}
+
+.choice.yes:hover {
+    transform: translateX(-65px) scale(1.05);
+}
+
+
+/* =========================
+   No
+========================= */
+
+.choice.no {
+    position: absolute;
+
+    left: 50%;
+
+    top: 10px;
+
+    transform: translateX(15px);
+
+    background: #eeeeee;
+
+    color: #888888;
+
+    border-radius: 30px;
+
+    padding: 13px 28px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    z-index: 6;
+
+    transition:
+        left 0.35s ease,
+        top 0.35s ease,
+        transform 0.35s ease;
 }
 
 
@@ -227,37 +288,44 @@ button {
 ========================= */
 
 .cute {
-    font-size: 65px;
+    font-size: 60px;
+
+    line-height: 1;
+
     margin-bottom: 3px;
 
-    animation:
-        cuteFloat 1.5s ease-in-out infinite;
+    animation: cuteMove 1.5s ease-in-out infinite;
 }
 
-@keyframes cuteFloat {
+@keyframes cuteMove {
 
-    0%, 100% {
+    0%,
+    100% {
         transform:
             translateY(0)
-            rotate(0deg);
+            rotate(0deg)
+            scale(1);
     }
 
     25% {
         transform:
             translateY(-5px)
-            rotate(-3deg);
+            rotate(-3deg)
+            scale(1.03);
     }
 
     50% {
         transform:
             translateY(0)
-            scale(1.04);
+            rotate(0deg)
+            scale(1.06);
     }
 
     75% {
         transform:
             translateY(-5px)
-            rotate(3deg);
+            rotate(3deg)
+            scale(1.03);
     }
 }
 
@@ -284,15 +352,19 @@ button {
 .floating-heart {
     position: absolute;
 
+    color: #e45b86;
+
     font-size: 20px;
 
     pointer-events: none;
 
+    z-index: 20;
+
     animation:
-        fly 1.5s ease-out forwards;
+        heartFly 1.5s ease-out forwards;
 }
 
-@keyframes fly {
+@keyframes heartFly {
 
     0% {
         opacity: 1;
@@ -357,6 +429,8 @@ button {
         id="screen2"
     >
 
+        <!-- 첫 번째 질문 -->
+
         <h1
             id="question1"
             class="question show"
@@ -365,19 +439,23 @@ button {
         </h1>
 
 
+        <!-- 두 번째 질문 -->
+
         <h1
             id="question2"
             class="question"
-            style="display:none;"
+            style="display: none;"
         >
             나 보고싶지?? 💗
         </h1>
 
 
+        <!-- 버튼 -->
+
         <div class="choices">
 
             <button
-                class="choice"
+                class="choice yes"
                 id="yesButton"
                 onclick="yesClick()"
             >
@@ -417,7 +495,6 @@ button {
 
     </div>
 
-
 </div>
 
 
@@ -425,8 +502,8 @@ button {
 <script>
 
 let questionNumber = 1;
-let questionTimer;
-let noMoveTimer;
+
+let noMoveTimer = null;
 
 
 /* =========================
@@ -438,7 +515,9 @@ function nextScreen(number) {
     document
         .querySelectorAll(".screen")
         .forEach(screen => {
+
             screen.classList.remove("active");
+
         });
 
 
@@ -448,13 +527,18 @@ function nextScreen(number) {
 
 
     if (number === 2) {
+
         startQuestion();
+
     }
 
 
     if (number === 3) {
+
         stopNoMoving();
+
         createHearts();
+
     }
 
 }
@@ -470,7 +554,7 @@ function yesClick() {
 
         questionNumber = 2;
 
-        changeToSecondQuestion();
+        showSecondQuestion();
 
     } else {
 
@@ -482,10 +566,10 @@ function yesClick() {
 
 
 /* =========================
-   두 번째 질문으로 변경
+   두 번째 질문
 ========================= */
 
-function changeToSecondQuestion() {
+function showSecondQuestion() {
 
     const first =
         document.getElementById("question1");
@@ -509,9 +593,9 @@ function changeToSecondQuestion() {
 
             second.classList.add("show");
 
-        }, 50);
+        }, 30);
 
-    }, 500);
+    }, 400);
 
 }
 
@@ -522,7 +606,7 @@ function changeToSecondQuestion() {
 
 function startQuestion() {
 
-    clearTimeout(questionTimer);
+    stopNoMoving();
 
     questionNumber = 1;
 
@@ -546,109 +630,155 @@ function startQuestion() {
     second.classList.remove("show");
 
 
+    resetNoButton();
+
     startNoMoving();
 
 }
 
 
 /* =========================
-   No 버튼 도망
+   No 초기 위치
+========================= */
+
+function resetNoButton() {
+
+    const no =
+        document.getElementById("noButton");
+
+
+    no.style.left = "50%";
+
+    no.style.top = "10px";
+
+    no.style.transform =
+        "translateX(15px)";
+
+}
+
+
+/* =========================
+   No 자동 도망 시작
 ========================= */
 
 function startNoMoving() {
 
     stopNoMoving();
 
-    const noButton =
-        document.getElementById("noButton");
 
+    /*
+       처음부터 바로 움직이지 않고
+       잠깐 보여준 뒤 도망
+    */
 
-    noButton.style.left = "calc(50% + 35px)";
-    noButton.style.top = "50%";
+    noMoveTimer = setInterval(() => {
 
+        moveNoButton();
 
-    noMoveTimer =
-        setInterval(() => {
-
-            moveNoButton();
-
-        }, 1000);
+    }, 800);
 
 }
 
 
 /* =========================
-   No 랜덤 이동
+   No 움직이기
 ========================= */
 
 function moveNoButton() {
 
-    const choices =
-        document.querySelector(".choices");
+    const card =
+        document.querySelector(".card");
 
-    const noButton =
+    const no =
         document.getElementById("noButton");
 
 
-    const areaWidth =
-        choices.clientWidth;
+    if (!document
+        .getElementById("screen2")
+        .classList
+        .contains("active")) {
 
-    const areaHeight =
-        choices.clientHeight;
+        return;
+
+    }
+
+
+    const padding = 15;
+
+
+    const cardWidth =
+        card.clientWidth;
+
+
+    const cardHeight =
+        card.clientHeight;
 
 
     const buttonWidth =
-        noButton.offsetWidth;
+        no.offsetWidth;
+
 
     const buttonHeight =
-        noButton.offsetHeight;
+        no.offsetHeight;
 
 
     const maxX =
-        Math.max(
-            0,
-            areaWidth - buttonWidth
-        );
+        cardWidth
+        - buttonWidth
+        - padding;
 
 
     const maxY =
-        Math.max(
-            0,
-            areaHeight - buttonHeight
-        );
+        cardHeight
+        - buttonHeight
+        - padding;
 
 
     const x =
-        Math.random() * maxX;
+        padding +
+        Math.random() *
+        Math.max(1, maxX - padding);
 
 
     const y =
-        Math.random() * maxY;
+        padding +
+        Math.random() *
+        Math.max(1, maxY - padding);
 
 
-    noButton.style.left =
+    no.style.transform =
+        "translateX(0)";
+
+
+    no.style.left =
         x + "px";
 
 
-    noButton.style.top =
+    no.style.top =
         y + "px";
 
 }
 
 
 /* =========================
-   No 이동 정지
+   No 도망 멈추기
 ========================= */
 
 function stopNoMoving() {
 
-    clearInterval(noMoveTimer);
+    if (noMoveTimer !== null) {
+
+        clearInterval(noMoveTimer);
+
+        noMoveTimer = null;
+
+    }
 
 }
 
 
 /* =========================
-   하트
+   하트 생성
 ========================= */
 
 function createHearts() {
@@ -668,15 +798,15 @@ function createHearts() {
 
 
         heart.style.left =
-            Math.random() * 90 + 5 + "%";
+            (Math.random() * 90 + 5) + "%";
 
 
         heart.style.bottom =
-            Math.random() * 30 + 20 + "%";
+            (Math.random() * 30 + 20) + "%";
 
 
         heart.style.animationDelay =
-            Math.random() * 0.5 + "s";
+            (Math.random() * 0.5) + "s";
 
 
         document
